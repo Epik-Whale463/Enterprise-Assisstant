@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise AI Assistant - Welcome</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #667eea;
+            --primary-gradient-end: #764ba2;
+            --secondary-color: #5a67d8;
+            --card-gradient-start: #F0F4F8;
+            --card-gradient-end: #E6EAF0;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+        }
+        .gradient-button {
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            transition: all 0.3s ease-in-out;
+        }
+        .gradient-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .performance-card {
+            background: linear-gradient(145deg, var(--card-gradient-start), var(--card-gradient-end));
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .performance-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .metric-icon {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col">
+        <header class="gradient-bg text-white py-6">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold tracking-wide" style="font-size: 2rem;">Enterprise AI Assistant</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow container mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-8">
+                    <h2 class="text-4xl font-bold text-gray-900 leading-tight">
+                        Transform Your Enterprise with AI-Powered Intelligence
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Streamline document processing, enhance communication, and unlock insights with our cutting-edge AI assistant.
+                    </p>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">Key Features:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center">
+                                <i class="fas fa-file-alt mr-3 text-purple-600"></i>
+                                Intelligent Document Processing
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-comments mr-3 text-purple-600"></i>
+                                Advanced Conversational AI
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-lock mr-3 text-purple-600"></i>
+                                Enterprise-Grade Security
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="{{ url_for('login') }}" class="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300">
+                            Get Started with Google
+                            <i class="fas fa-arrow-right ml-3"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex justify-center">
+                    <img src="../static/dashboard_pic.png" alt="AI Assistant Illustration" class="animate-float w-full max-w-xl rounded-lg shadow-2xl">
+                </div>
+            </div>
+
+            <!-- Performance Cards Section -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="performance-card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-4xl metric-icon mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Document Processing</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Accuracy</span>
+                            <span class="font-semibold text-purple-700">95.6%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-purple-600 h-2.5 rounded-full" style="width: 95.6%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-brain text-4xl metric-icon mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">AI Comprehension</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Context Retention</span>
+                            <span class="font-semibold text-green-700">92.3%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 92.3%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-card p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tachometer-alt text-4xl metric-icon mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Processing Speed</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Response Time</span>
+                            <span class="font-semibold text-blue-700">0.3s</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-gray-900 text-white py-3">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2024 Enterprise AI Assistant. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Compose Email{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12 fade-in">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Compose Email</h1>
+        <p class="text-gray-600 text-lg">Generate an email draft using AI</p>
+    </div>
+
+    <!-- Form to input email prompt -->
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+        <form method="POST">
+            <div class="space-y-4">
+                <div class="flex flex-col">
+                    <label for="prompt" class="text-gray-700 text-lg font-medium">Enter your email prompt</label>
+                    <textarea id="prompt" name="prompt" rows="6" class="mt-2 p-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600" placeholder="Describe the purpose of the email...">{{ prompt or '' }}</textarea>
+                </div>
+                <button type="submit" class="w-full gradient-button text-white py-3 rounded-md hover:bg-opacity-80">
+                    Generate Email
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% if email_draft %}
+    <!-- Editable section for generated email draft -->
+    <div class="mt-8 bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Generated Email Draft</h2>
+        <!-- Form to edit the draft -->
+        <form method="POST">
+            <div class="flex flex-col">
+                <label for="email_draft" class="text-gray-700 text-lg font-medium">Edit Email Draft</label>
+                <textarea id="email_draft" name="email_draft" rows="8" class="mt-2 p-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">{{ email_draft }}</textarea>
+            </div>
+            <button type="submit" class="w-full gradient-button text-white py-3 rounded-md hover:bg-opacity-80 mt-4">
+                Save Edits
+            </button>
+        </form>
+    </div>
+
+    <!-- Recipient Email and Additional Info Section -->
+    <div class="mt-8">
+        <form method="POST" action="{{ url_for('send_email_route') }}">
+            <!-- Hidden inputs for email draft -->
+            <input type="hidden" name="email_draft" value="{{ email_draft }}">
+
+            <!-- Recipient Email Field -->
+            <div class="flex flex-col">
+                <label for="recipient_email" class="text-gray-700 text-lg font-medium">Recipient Email</label>
+                <input id="recipient_email" name="recipient_email" type="email" class="mt-2 p-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600" placeholder="Enter recipient's email" required>
+            </div>
+
+            <!-- HR Manager Name -->
+            <div class="flex flex-col">
+                <label for="hr_manager_name" class="text-gray-700 text-lg font-medium">HR Manager's Name</label>
+                <input id="hr_manager_name" name="hr_manager_name" type="text" class="mt-2 p-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600" placeholder="Enter HR Manager's Name" required>
+            </div>
+
+            <!-- Start Date -->
+            <div class="flex flex-col">
+                <label for="start_date" class="text-gray-700 text-lg font-medium">Start Date</label>
+                <input id="start_date" name="start_date" type="date" class="mt-2 p-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+            </div>
+
+            <!-- End Date -->
+            <div class="flex flex-col">
+                <label for="end_date" class="text-gray-700 text-lg font-medium">End Date</label>
+                <input id="end_date" name="end_date" type="date" class="mt-2 p-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+            </div>
+
+            <button type="submit" class="w-full gradient-button text-white py-3 rounded-md hover:bg-opacity-80 mt-4">
+                Send Email
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

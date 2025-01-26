@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}Enterprise AI Assistant{% endblock %}</title>
+    
+    <!-- Critical CSS and Performance Optimization -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="/static/favicon.png">
+    
+    <!-- SEO and Accessibility Meta Tags -->
+    <meta name="description" content="Enterprise AI Assistant for Streamlined Business Operations">
+    <meta name="robots" content="index, follow">
+    <meta name="application-name" content="Enterprise AI Assistant">
+    
+    <style>
+        :root {
+            --primary-gradient-start: #667eea;
+            --primary-gradient-end: #764ba2;
+            --secondary-color: #5a67d8;
+            --transition-speed: 0.3s;
+        }
+        
+        /* Enhanced Color Palette and Accessibility */
+        body {
+            @apply antialiased text-gray-900 min-h-screen flex flex-col;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        /* Refined Gradient and Interactive Styles */
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            transition: background 0.5s ease;
+        }
+        
+        .gradient-button {
+            @apply text-white font-semibold transition-all duration-300 ease-in-out;
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-button:hover {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-gradient-end));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Improved Interactive Elements */
+        .interactive-element {
+            @apply transition-all duration-300 transform will-change-transform;
+        }
+        
+        .interactive-element:hover {
+            @apply scale-105 shadow-lg;
+        }
+        
+        /* Enhanced Navigation Styles */
+        .nav-link {
+            @apply px-3 py-2 rounded-md transition-all duration-300 
+                   hover:bg-white hover:bg-opacity-20 
+                   focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50;
+        }
+        
+        .active-nav-link {
+            @apply bg-white bg-opacity-20 font-semibold;
+        }
+        
+        /* Loading Indicator */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Sync Glow Effect */
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(102, 126, 234, 0.5), 
+                            0 0 10px rgba(118, 75, 162, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 15px rgba(102, 126, 234, 0.7), 
+                            0 0 20px rgba(118, 75, 162, 0.5);
+            }
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s infinite ease-in-out;
+            transition: all 0.3s ease;
+        }
+
+        .animate-pulse-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #c9ccd6cc, 
+                        0 0 25px rgba(61, 6, 116, 0.6);
+        }
+        
+        /* Responsive Typography */
+        @screen sm {
+            body {
+                font-size: 14px;
+            }
+        }
+        
+        @screen md {
+            body {
+                font-size: 16px;
+            }
+        }
+    </style>
+    
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="bg-gray-50 flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50">
+        <nav class="gradient-bg text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-xl font-bold tracking-wide" style="font-size: 2rem;">Enterprise AI Assistant</h1>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <nav class="flex space-x-4" aria-label="Application Navigation">
+                        <a href="/security-settings" class="nav-link {{ 'active-nav-link' if active_page == 'security-settings' else '' }}" aria-current="{{ 'page' if active_page == 'security-settings' else 'false' }}">
+                            <i class="fas fa-shield-alt mr-2" aria-hidden="true"></i>Security
+                        </a>
+                        <a href="/content-moderation" class="nav-link {{ 'active-nav-link' if active_page == 'content-moderation' else '' }}" aria-current="{{ 'page' if active_page == 'content-moderation' else 'false' }}">
+                            <i class="fas fa-filter mr-2" aria-hidden="true"></i>Moderation
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-question-circle mr-2" aria-hidden="true"></i>Help
+                        </a>
+                    </nav>
+                    
+                    <div class="flex items-center space-x-4">
+                        <a href="/profile" class="gradient-button px-4 py-2 rounded-lg flex items-center space-x-2 relative animate-pulse-glow interactive-element">
+                            <i class="fas fa-user-circle text-xl" aria-hidden="true"></i>
+                            <span class="font-semibold">{{ session['name'] }} <br> {{ session['email'] }}</span>
+
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="gradient-button px-4 py-2 rounded-lg flex items-center space-x-2 relative animate-pulse-glow interactive-element" aria-label="Logout">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="gradient-bg text-white shadow-md">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex space-x-6">
+                        {% set pages = [
+                            ('Dashboard', '/dashboard'),
+                            ('Document Processing', '/document-processing'),
+                            ('HR Policies', '/hr-policies'),
+                            ('IT Support', '/it-support'),
+                            ('Company Events', '/company-events')
+                        ] %}
+                        
+                        {% for name, url in pages %}
+                            <a href="{{ url }}" class="nav-link {{ 'active-nav-link' if active_page == name|lower|replace(' ', '-') else '' }}" 
+                               aria-current="{{ 'page' if active_page == name|lower|replace(' ', '-') else 'false' }}">
+                                {{ name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                    
+                    <button class="md:hidden focus:outline-none" aria-label="Toggle Mobile Menu">
+                        <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-100 py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>&copy; {{ current_year }} Enterprise AI Assistant. All Rights Reserved.</p>
+            <nav class="mt-2 space-x-4">
+                <a href="/privacy" class="hover:text-gray-900">Privacy Policy</a>
+                <a href="/terms" class="hover:text-gray-900">Terms of Service</a>
+                <a href="/contact" class="hover:text-gray-900">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Performance and Accessibility Optimized Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.2/alpine.js" defer></script>
+    <script>
+        function showLoading() {
+            const existingLoader = document.getElementById('loading-overlay');
+            if (existingLoader) return;
+
+            const loader = document.createElement('div');
+            loader.id = 'loading-overlay';
+            loader.innerHTML = `
+                <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white p-6 rounded-lg shadow-xl flex items-center" role="alert">
+                        <div class="loading-spinner w-8 h-8 border-4 border-purple-600 rounded-full border-t-transparent"></div>
+                        <span class="ml-4 text-gray-800 font-medium">Processing...</span>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(loader);
+        }
+
+        function hideLoading() {
+            const loader = document.getElementById('loading-overlay');
+            if (loader) loader.remove();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', showLoading);
+            });
+
+            // Optional: Hide loading on page load complete or ajax complete
+            window.addEventListener('load', hideLoading);
+        });
+    </script>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
